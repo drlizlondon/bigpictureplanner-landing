@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Big Picture Planner — Stop keeping it all in your head</title>
+  <meta name="description" content="The planner for people with full lives. See everything you need to do, all at once, without the overwhelm. Free for 4 weeks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #5B35F5;
+      --purple-light: #ede9ff;
+      --purple-dark: #4222d4;
+      --text: #0f0f0f;
+      --text-secondary: #555;
+      --text-muted: #888;
+      --border: #e8e8e8;
+      --bg: #ffffff;
+      --bg-soft: #f9f8ff;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-cta {
+      background: var(--purple);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--purple-dark); }
+
+    /* HERO */
+    .hero {
+      padding: 80px 24px 72px;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--purple-light);
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    h1 span { color: var(--purple); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 540px;
+      margin: 0 auto 40px;
+    }
+
+    /* WAITLIST FORM */
+    .form-wrap {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 8px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 6px 6px 20px;
+      box-shadow: 0 4px 24px rgba(91,53,245,0.10);
+      transition: border-color 0.15s;
+    }
+
+    .form-row:focus-within { border-color: var(--purple); }
+
+    .form-row input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text);
+      background: transparent;
+      min-width: 0;
+    }
+
+    .form-row input::placeholder { color: var(--text-muted); }
+
+    .form-row button {
+      flex-shrink: 0;
+      background: var(--purple);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
+      border: none;
+      border-radius: 100px;
+      padding: 10px 22px;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .form-row button:hover { background: var(--purple-dark); }
+    .form-row button:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    .form-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .form-note strong { color: var(--purple); }
+
+    .form-success {
+      display: none;
+      background: var(--purple-light);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      text-align: center;
+    }
+
+    .form-success.visible { display: block; }
+
+    .form-success-emoji { font-size: 32px; margin-bottom: 8px; }
+
+    .form-success h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .form-success p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* SCREENSHOT */
+    .screenshot-section {
+      background: var(--bg-soft);
+      padding: 16px 24px 0;
+      overflow: hidden;
+    }
+
+    .screenshot-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      border-radius: var(--radius) var(--radius) 0 0;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      border-bottom: none;
+      box-shadow: 0 -4px 40px rgba(91,53,245,0.08);
+    }
+
+    .screenshot-inner img {
+      width: 100%;
+      display: block;
+    }
+
+    .screenshot-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #ede9ff 0%, #f0f4ff 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--purple);
+    }
+
+    .screenshot-placeholder span {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.6;
+    }
+
+    /* PAIN POINTS */
+    .pain-section {
+      padding: 80px 24px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 16px;
+    }
+
+    .pain-section h2 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 48px;
+      max-width: 560px;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .pain-card {
+      background: var(--bg-soft);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .pain-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .pain-card h3 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .pain-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* FEATURES */
+    .features-section {
+      background: var(--text);
+      color: #fff;
+      padding: 80px 24px;
+    }
+
+    .features-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .features-section .section-label { color: #a78bfa; }
+
+    .features-section h2 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 48px;
+      max-width: 500px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-item { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 24px; }
+
+    .feature-num {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #a78bfa;
+      margin-bottom: 12px;
+    }
+
+    .feature-item h3 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .feature-item p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+    }
+
+    /* FOUNDER */
+    .founder-section {
+      padding: 80px 24px;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .founder-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--purple-light);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .founder-section blockquote {
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .founder-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    /* BOTTOM CTA */
+    .cta-section {
+      background: var(--purple);
+      padding: 72px 24px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      opacity: 0.8;
+      margin-bottom: 36px;
+    }
+
+    .cta-section .form-row {
+      box-shadow: 0 4px 32px rgba(0,0,0,0.2);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .cta-section .form-row:focus-within { border-color: rgba(255,255,255,0.8); }
+
+    .cta-section .form-row input { color: var(--text); }
+
+    .cta-section .form-row button {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .cta-section .form-row button:hover { background: #333; }
+
+    .cta-section .form-note { color: rgba(255,255,255,0.6); }
+    .cta-section .form-note strong { color: #fff; }
+
+    /* FOOTER */
+    footer {
+      padding: 28px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* UTILS */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 56px 20px 56px; }
+      .form-row { border-radius: var(--radius); flex-direction: column; padding: 12px; gap: 8px; }
+      .form-row input { padding: 4px 8px; font-size: 16px; }
+      .form-row button { border-radius: var(--radius-sm); padding: 13px; }
+      .pain-section, .founder-section { padding: 56px 20px; }
+      .features-section { padding: 56px 20px; }
+      .cta-section { padding: 56px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Big Picture Planner</a>
+    <a href="#waitlist" class="nav-cta">Get early access</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Early access — 4 weeks free</div>
+    <h1>Stop keeping it all<br><span>in your head.</span></h1>
+    <p class="hero-sub">
+      The planner for people with full lives. See everything — school runs, deadlines, appointments, the lot — all at once, without the overwhelm.
+    </p>
+
+    <div class="form-wrap" id="waitlist">
+      <div class="form-row">
+        <input type="email" id="hero-email" placeholder="your@email.com" autocomplete="email" />
+        <button type="button" onclick="joinWaitlist('hero-email', 'hero-success')">Join the waitlist</button>
+      </div>
+      <p class="form-note"><strong>First 50 people get 4 weeks completely free.</strong> No card needed.</p>
+      <div class="form-success" id="hero-success">
+        <div class="form-success-emoji">🎉</div>
+        <h3>You're on the list!</h3>
+        <p>We'll be in touch very soon with your free access link.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP SCREENSHOT -->
+  <div class="screenshot-section">
+    <div class="screenshot-inner">
+      <!-- Replace src with your actual screenshot -->
+      <div class="screenshot-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+        <span>Screenshot coming soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN POINTS -->
+  <section class="pain-section">
+    <p class="section-label">Sound familiar?</p>
+    <h2>You've got a lot on. And it's all living rent-free in your head.</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-icon">🧠</span>
+        <h3>Your brain is full</h3>
+        <p>You're holding 47 things in your head at once and you're terrified of forgetting something important.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">😬</span>
+        <h3>Planning feels scary</h3>
+        <p>You avoid writing it all down because you're scared seeing it will make the overwhelm worse, not better.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">📅</span>
+        <h3>The week sneaks up on you</h3>
+        <p>Monday arrives and you're already behind. School trip today? Dog at the vet? Oh no.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">🔍</span>
+        <h3>You need the big picture</h3>
+        <p>Daily to-do lists aren't enough. You need to see the whole week — the whole month — at a glance.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="features-inner">
+      <p class="section-label">What makes it different</p>
+      <h2>Built for brains that hold too much.</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <p class="feature-num">01</p>
+          <h3>See the whole week at once</h3>
+          <p>Everything laid out in front of you — fixed commitments, flexible tasks, travel time — so nothing gets lost.</p>
+        </div>
+        <div class="feature-item">
+          <p class="feature-num">02</p>
+          <h3>Drag, drop, and fit it in</h3>
+          <p>Pick up a task from your inbox and drop it exactly where it fits. It's as satisfying as it sounds.</p>
+        </div>
+        <div class="feature-item">
+          <p class="feature-num">03</p>
+          <h3>Works across all your devices</h3>
+          <p>Plan on your laptop in the evening, check on your phone in the morning. Always in sync.</p>
+        </div>
+        <div class="feature-item">
+          <p class="feature-num">04</p>
+          <h3>No faff, no overwhelm</h3>
+          <p>Just a clear, calm view of your week. Nothing you don't need. Everything you do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER NOTE -->
+  <section class="founder-section">
+    <div class="founder-avatar">👋</div>
+    <blockquote>
+      "I built this because I needed it. I had too much going on and every planner I tried made me feel worse, not better. This one actually helps."
+    </blockquote>
+    <p class="founder-name">— Lizzie, founder</p>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="cta-section">
+    <h2>Ready to see the big picture?</h2>
+    <p>Join the waitlist — first 50 get 4 weeks completely free.</p>
+    <div class="form-wrap">
+      <div class="form-row">
+        <input type="email" id="footer-email" placeholder="your@email.com" autocomplete="email" />
+        <button type="button" onclick="joinWaitlist('footer-email', 'footer-success')">Get free access</button>
+      </div>
+      <p class="form-note"><strong>No credit card.</strong> Just your email.</p>
+      <div class="form-success" id="footer-success">
+        <div class="form-success-emoji">🎉</div>
+        <h3>You're on the list!</h3>
+        <p>We'll be in touch very soon with your free access link.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Big Picture Planner &nbsp;·&nbsp; <a href="https://drlizlondon.github.io/big-picture-planner/">Open the app</a></p>
+  </footer>
+
+  <!-- SUPABASE WAITLIST SCRIPT -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const SUPABASE_URL = 'https://ovdrrltrhctwvtngjiaw.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im92ZHJybHRyaGN0d3Z0bmdqaWF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MTE1ODMsImV4cCI6MjA5NjQ4NzU4M30.8c5_67GeGFIxXb11E9D4wGy5j37yeOD8ULMRDDSjXJs';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    window.joinWaitlist = async (inputId, successId) => {
+      const input = document.getElementById(inputId);
+      const successEl = document.getElementById(successId);
+      const email = input.value.trim();
+
+      if (!email || !email.includes('@')) {
+        input.focus();
+        return;
+      }
+
+      const btn = input.closest('.form-row').querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
+
+      const { error } = await supabase
+        .from('waitlist')
+        .insert({ email, source: 'landing' });
+
+      if (error && error.code !== '23505') {
+        // 23505 = duplicate email, treat as success
+        btn.disabled = false;
+        btn.textContent = 'Try again';
+        return;
+      }
+
+      input.closest('.form-row').style.display = 'none';
+      input.closest('.form-wrap').querySelector('.form-note').style.display = 'none';
+      successEl.classList.add('visible');
+    };
+  </script>
+
+</body>
+</html>
