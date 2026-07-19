@@ -28,7 +28,7 @@ The original MVP in this document was still Version 3 thinking wearing Version 1
 
 **What V1 keeps invisibly:** the Business Brain schema (§8 of the PRD), populated silently by the conversation. Business Brain, Mission Control and AI Business Admin remain the long-term architecture (§1–§10 below) — they disappear into the background for V1 and become natural evolutions once someone has actually built a business.
 
-**Simplest possible sequence:** Day 0 — the "Build a Business" page with the £150 session bookable goes live before any software exists (Liz already delivers this session in person; every one run before launch is training data for the guide's prompts). Days 1–4 — the guided conversation itself, now small enough to build in days.
+**The software is the MVP** (v3 correction — the earlier "session page first, software later" sequencing was too cautious). The £150 session needs no validation; Liz already knows people book it. The genuinely unproven hypothesis is: *can an AI-guided conversation build enough confidence for someone to launch a business?* Only shipping the conversation tests that. V1 is therefore the guided conversational widget itself, embedded in the personal website and built entirely in Lovable, with the session offered strictly as the natural next step at the end — never as the lead. Confidence is measured directly: an opening and closing pulse woven into the conversation, plus the behavioural proof ("I published my site" confirmations and session bookings from the plan).
 
 ---
 
