@@ -3,6 +3,35 @@
 
 This document challenges and restructures the four-product portfolio (Business Creator, Business Auditor, Mission Control, AI Business Admin) before any PRD work. The PRD that follows from this strategy is in `docs/PRD.md`.
 
+> **Revision note (v2):** §0 below supersedes parts of this document for Version 1. The platform analysis (§1–§10) remains the long-term architecture; §0 corrects what Version 1 actually is. `docs/PRD.md` now specs V1 only.
+
+---
+
+## 0. The V1 correction — from platform to first experience
+
+The original MVP in this document was still Version 3 thinking wearing Version 1 clothes: a wizard with stages, a tabbed workspace, accounts, a dashboard, an admin panel. Product-shaped, not person-shaped.
+
+**Version 1 is not a platform. It is the best possible first experience for someone building their first business.** It lives inside Liz's personal website as a capability ("Build a Business"), fed by warm traffic Liz directs personally from talks, networking and events.
+
+**The user** is a first-time founder: a mum returning to work, a freelancer, a healthcare professional, someone with an idea and no confidence. **The scarce resource is confidence — not automation, not dashboards, not AI.** The outputs (concept, positioning, offer, pricing, copy, Lovable prompt, launch checklist) are *evidence* of the confidence, not the product.
+
+**The promise:** "Let's build your business." The website is one output, never the headline.
+
+**The experience:** a friendly guide — one warm question at a time, encouraging, practical, occasionally (never constantly) challenging. Not a chatbot, not a consultant, not a corporate flow. Two design rules resolve the tensions in this brief:
+
+1. **Honest about the AI, personal in framing.** Users will know it's AI; hiding it would break trust. Frame it as *"a guide I built"* — Liz's methodology, delivered by an assistant, with Liz one click away.
+2. **A conversation with a spine.** Freeform chat wanders and can't guarantee the promised complete plan. The guide has an invisible phase structure underneath (it always knows what it still needs to learn) while presenting as natural conversation on the surface.
+
+**Commercial model:** free complete guided experience; £150 "Build it with me" session that *accelerates* the same journey (refine together, challenge together, leave with a polished published site) rather than being a different product.
+
+**What V1 explicitly cuts** (from this document's original MVP): accounts/login (the plan is delivered to a private tokenized link by email), the tabbed workspace (replaced by a single beautiful Business Plan page), the dashboard, the admin panel (replaced by a completion email to Liz — which doubles as session-prep pipeline), multiple businesses per user, the mid-flow signup gate (email is asked for conversationally near the end), and Door B / the URL mini-audit (deferred until V1 proves itself).
+
+**What V1 keeps invisibly:** the Business Brain schema (§8 of the PRD), populated silently by the conversation. Business Brain, Mission Control and AI Business Admin remain the long-term architecture (§1–§10 below) — they disappear into the background for V1 and become natural evolutions once someone has actually built a business.
+
+**Simplest possible sequence:** Day 0 — the "Build a Business" page with the £150 session bookable goes live before any software exists (Liz already delivers this session in person; every one run before launch is training data for the guide's prompts). Days 1–4 — the guided conversation itself, now small enough to build in days.
+
+---
+
 ---
 
 ## 1. The core verdict

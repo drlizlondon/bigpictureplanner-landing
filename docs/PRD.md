@@ -1,166 +1,168 @@
-# PRD — "Build a Business" MVP (Business Creator + Founder Session)
-### v1.0 · July 2026 · builds on `docs/STRATEGY.md`
+# PRD — "Build a Business" V1: The Guided First-Business Experience
+### v2.0 · July 2026 · supersedes v1.0 · strategy in `docs/STRATEGY.md` (§0)
 
 ---
 
 ## 1. Summary
 
-A free, guided AI wizard that takes someone from *business idea* to a complete **Business Pack** — developed idea, positioning, offer, website copy, and a ready-to-paste Lovable prompt — with a paid upsell to a **£150 60-minute launch session** with Liz. It is the first surface of a single platform whose core asset is the **Business Brain**: a persistent structured model of the user's business that later powers audits, Mission Control, and the AI Business Admin.
+A free, conversational guided experience on Liz's personal website that helps a first-time founder turn an idea into a real business plan — concept, positioning, target customer, offer, pricing, website copy, brand messaging, a complete Lovable prompt, and a first-week launch checklist — delivered as a single beautiful **Business Plan** page. A £150 **"Build it with me"** session accelerates the same journey live with Liz.
 
-**This PRD covers the MVP only.** Audit, Mission Control, integrations, and any autonomous/agentic behaviour are out of scope (see §10).
+**The objective is confidence, not automation.** The user should leave feeling that someone sat beside them and helped them think — and holding proof that their idea is real.
+
+**Not in V1:** accounts, dashboards, audits, integrations, Mission Control, AI Business Admin, anything agentic. The Business Brain schema (§8) is populated silently as the only bridge to that future.
 
 ## 2. Goals & success metrics
 
 | Goal | Metric | Target (first 30 days) |
 |---|---|---|
-| Prove demand | Wizard starts | 200+ |
-| Prove the experience | Wizard completion rate (start → Business Pack) | ≥ 40% |
-| Prove monetisation | £150 sessions booked | 5+ |
-| Build the funnel | Emails captured | ≥ 60% of completers |
-| Seed the platform | Business Brains stored with full schema | 100% of completions |
+| People start | Conversations begun | 100+ (warm traffic; Liz-directed) |
+| People finish | Conversation → plan delivered | ≥ 50% |
+| Confidence becomes action | "I published my site" confirmations | ≥ 20% of plans |
+| Monetisation | £150 sessions booked | 5+ |
+| Word of mouth | Plan links forwarded / referral visits | qualitative signal, tracked |
+
+"Confidence" is operationalised as: *did they publish, and did they tell someone?* Both are measured (the checklist's publish button; the share prompt).
 
 ## 3. Target user
 
-**Primary:** pre-launch founder — has an idea (or several), hasn't launched, overwhelmed by where to start. Not technical. Willing to spend an evening, not a month.
+Someone who has never started a business: a mum returning to work, a freelancer, a healthcare professional, someone with an idea but no confidence. Non-technical. Nervous. Arriving warm — usually because Liz told them personally to come here.
 
-**Secondary (do not optimise for, do not block):** early-stage owner rethinking their positioning/offer.
+**Design consequence:** zero jargon ("positioning", "ICP", "funnel" never appear in the user-facing experience — the guide says "who it's for", "what makes yours different"), zero friction before value, and no vocabulary that implies they should already know things.
 
-## 4. Core product principles
+## 4. Product principles
 
-1. **Challenge, don't cheerlead.** At every stage the AI proposes, then pushes back with 1–2 sharp questions before refining. The experience should feel like a strategist who cares, not an autocomplete. This is the primary differentiator vs. ChatGPT.
-2. **The output is a Business Pack, not a website.** The Lovable prompt is the last artefact, never the headline.
-3. **Everything writes to the Business Brain schema (§8).** No free-text blobs as the source of truth.
-4. **No dead ends.** Every screen has one obvious next step; the final screen's next steps are "build your site" and "book a session".
+1. **Confidence is the product.** Every design decision is tested against: does this make a nervous first-timer feel more capable, or less?
+2. **A guide beside them, not a form in front of them.** One question at a time, warm, in plain language. Never two questions in one message. Never a visible "Step 3 of 9".
+3. **Honest about the AI, personal in framing.** Introduced as "a guide Liz built". No pretending to be human; no cold "AI assistant" framing either.
+4. **Encourage by default; challenge sparingly.** Maximum 2–3 gentle challenges per conversation, each specific to what the user actually said, each ending in encouragement. One honest pushback proves the praise is real; constant pushback intimidates.
+5. **"I don't know" is always a valid answer.** The guide says so early, and responds to uncertainty by offering suggestions to react to ("want me to have a go, and you tell me what feels right?").
+6. **The plan is the artefact; the website is one section of it.** The Lovable prompt is never the headline.
+7. **Conversation on the surface, spine underneath.** The guide always knows which phase it's in and what it still needs to learn; the user only ever experiences a natural conversation.
 
-## 5. User journey & screens
+## 5. Experience specification
 
-### 5.1 Landing section ("Build a Business")
-Lives inside Liz's personal site. Hero: the two doors from strategy — MVP enables only Door A.
-- Headline (e.g. "Turn your idea into a real business — this week.")
-- Sub: what the wizard produces (the Business Pack), ~15 minutes, free.
-- Primary CTA: **Start free** → wizard. Secondary CTA: **Work with me — £150 launch session** → session page.
-- Social proof/credibility strip (Liz's bio, past work).
+### 5.1 Entry: "Build a Business" page (on Liz's site)
 
-### 5.2 Wizard — Stage 0: Intake (no signup required to start)
-One question per screen, progress indicator, back navigation, answers persisted locally until account creation. Questions:
+- Navigation item on the personal website: **Build a Business**.
+- Hero: the promise — *"Let's build your business."* Sub: for people who've always wanted to start something; free; about 20 minutes; you'll leave with a real plan and a website ready to launch.
+- Liz's personal note (photo, 2–3 sentences: why she built this, honest mention that a guide she built will walk you through it).
+- Primary CTA: **Start — it's free**. Secondary: **Build it with me — £150** (§5.5).
+- No email, no signup, no barrier before the conversation.
 
-1. What's your idea, in your own words? (long text)
-2. Who is it for? (long text)
-3. What problem does it solve for them? (long text)
-4. Why you? What's your unfair advantage — skills, experience, audience, obsession? (long text)
-5. How do you imagine making money? (select: one-off purchase / subscription / service·time / marketplace·commission / not sure)
-6. What could someone pay for a good solution to this problem today? (select ranges / not sure)
-7. Who else solves this now, and what do people do instead? (long text, optional)
-8. How much time can you give this per week? (select: <5h / 5–15h / 15–30h / full-time)
-9. What does success look like in 12 months? (select: side income / replace salary / build a company / not sure)
-10. What's your first name, and what should we call the business for now? (short text; working name optional)
+### 5.2 The conversation
 
-### 5.3 Wizard — Stages 1–4: develop → position → offer → copy
-Each stage follows the same **propose → challenge → refine** loop:
+A single full-screen conversational UI. The guide speaks first. One question per message. Short quick-reply chips where they lower effort (e.g. "How much time can you give this each week?"), free text everywhere else. An always-visible, gentle reassurance line: *"No wrong answers — 'I'm not sure' is always fine."*
 
-- **Propose:** AI generates the stage output from the Brain so far.
-- **Challenge:** AI asks 1–2 pointed questions exposing the weakest assumption (e.g. "You've said 'everyone with a dog' — a premium service can't serve everyone. Urban professionals who feel guilty at work, or rural owners with working dogs?"). User answers or clicks "keep as is".
-- **Refine:** AI regenerates incorporating the answer. User can edit any field inline before continuing.
-- Each stage ends with an explicit **"Lock it in"** action that writes to the Brain.
+**Invisible spine — seven phases.** Each phase has a goal, the Brain fields it must fill, and permitted conversational moves. The guide moves on when the phase goal is met, not after a fixed question count. Total target: 15–25 minutes, roughly 18–25 guide messages.
 
-| Stage | Output written to Brain |
-|---|---|
-| 1. Idea development | Sharpened one-sentence idea, target customer, problem, differentiation, risks/assumptions (top 3), viability note (honest, incl. "this is crowded/weak because…") |
-| 2. Positioning | Category, audience definition, key differentiator, positioning statement, 3 message pillars, tone of voice |
-| 3. Offer | Offer name, deliverables/format, price + rationale, guarantee/risk-reversal, primary CTA |
-| 4. Website copy | Hero (headline, sub, CTA), problem section, solution section, offer section, about/founder section, FAQ (5), footer CTA |
+| Phase | Goal | Fills (Brain §8) |
+|---|---|---|
+| 1. Welcome & the idea | Put them at ease; hear the idea in their own words; **mirror moment** (§5.3) | `intake`, `identity.one_liner` (draft) |
+| 2. The person it's for | Get from "everyone" to one vivid person; likely site of challenge #1 | `customer.*` |
+| 3. Why you | Surface their story and unfair advantage — they usually can't see it themselves | `founder.*` |
+| 4. The offer | Shape what they'll actually sell: format, deliverable, first price with rationale | `offer.*` |
+| 5. The words | Business name (or working name), one-liner, tone; message pillars derived silently | `identity.*`, `positioning.*` |
+| 6. The website | Confirm the few facts copy needs (a favourite customer story, what visitors should do); copy itself is generated, not dictated | `website.*` |
+| 7. The send-off | Recap what they've built (their arc, reflected back); ask where to send the plan; set up what happens next | `owner.email`, plan delivery |
 
-**Signup gate:** placed after Stage 1's first "Propose" (they've seen real value, they're invested). Email + password or magic link. All prior answers migrate into the account.
+**Email capture** happens only in phase 7, conversationally: *"I've put your whole plan together. Where should I send it?"* — a human question at the moment of maximum earned trust, not a gate.
 
-### 5.4 Results — the Business Pack
-A workspace page (persistent, revisitable) with tabs:
-1. **Idea** · 2. **Positioning** · 3. **Offer** · 4. **Website copy** · 5. **Website prompt** · 6. **Next steps**
+### 5.3 Required delight moments (acceptance criteria, not aspirations)
 
-Each tab: rendered content, inline edit, "regenerate with feedback" (one round per field), copy button. **Website prompt** tab: the generated Lovable prompt (§7) in a copy-friendly block with 3-step instructions ("Open lovable.dev → paste → publish"). **Next steps** tab: 7-day launch checklist + prominent £150 session card.
+1. **First 30 seconds are about them.** The first question is about their idea — never contact details.
+2. **The mirror moment (phase 1).** After hearing the idea, the guide reflects it back sharper than they said it: *"So — [their idea, elevated, in one clean sentence]. Did I get that right?"* This is the moment they decide to stay.
+3. **Callbacks.** At least twice, the guide references a specific earlier detail (*"you said you spent ten years in nursing — that belongs on your About page"*). Proof of listening.
+4. **One earned challenge.** At least one specific, kind pushback with a reason and a proposed alternative, ending in encouragement.
+5. **Their words in the copy.** Website copy visibly contains their story and phrases, not template text.
+6. **The recap (phase 7).** Before delivery, the guide narrates their arc: *"An hour ago this was 'I've always wanted to…'. Now you have [name], for [person], offering [offer] at [price]. That's a business."*
 
-### 5.5 Session page (Option B — £150)
-- What happens in the 60 minutes (challenge the idea, refine positioning/offer, build the first website together, leave live).
-- Who it's for / not for. Liz's credibility.
-- **Book & pay:** Stripe Payment Link (£150) → on success, redirect to Calendly (or Cal.com) booking. No custom booking/payments build in MVP.
-- If the user has a Business Pack, the confirmation notes their pack will be reviewed before the call (manual for MVP; admin view §5.7).
+### 5.4 The Business Plan (output)
 
-### 5.6 Dashboard
-Signed-in home: list of the user's businesses (Brains) with status (in progress / pack complete), "Start another idea", session CTA.
+A single, beautiful, scrolling page at a private tokenized URL (`/plan/{token}`), also emailed. **No login.** Designed to be screenshotted and shown to a partner with pride.
 
-### 5.7 Admin (Liz only)
-Table of all users/Brains: email, business name, stage reached, created date, pack link (read-only), session-booked flag (manual toggle for MVP). Basic funnel counts (starts, completions, emails, per stage drop-off).
+Sections, in order:
+1. **[Business name]** — masthead with the one-liner.
+2. **Your idea** — the concept, sharpened.
+3. **Who it's for** — the vivid customer description.
+4. **Why you** — their story as an asset.
+5. **Your offer** — what, format, price, and the price rationale in plain words.
+6. **Your words** — messaging: one-liner, three key messages, tone.
+7. **Your website** — the full copy (hero, problem, solution, offer, about, FAQ, footer), then the **Lovable prompt** in a copy-friendly block with three plain steps ("Open lovable.dev → paste → publish"). Prompt spec unchanged from v1 (§7).
+8. **Your first week** — a 7-item practical launch checklist. Item 1 after publishing: *"Send your new website to one person who believes in you."* Includes an **"I published my site 🎉"** button (logs the confirmation; triggers a congratulations email from Liz's address).
+9. **Go further** — the £150 session card: *"Want to do the next round of this together?"*
+
+The plan link is deliberately forwardable — a friend who receives it lands on Liz's branded experience with its own "Start yours free" CTA.
+
+### 5.5 "Build it with me" — £150 session page
+
+- What happens in the 60 minutes: refine the business together, sharpen who it's for, improve the offer, challenge what needs challenging, and leave with a polished website ready to publish. Framed as **an acceleration of the free experience** — same journey, faster and with Liz.
+- Who it's for / not for. Liz's credibility, warmly.
+- **Book & pay:** Stripe Payment Link (£150) → redirect to Calendly/Cal.com. Zero custom booking code.
+- If a Business Plan token is present (arriving from a plan page), it's attached to the booking notes so Liz reads the plan before the call.
+- **This page ships on day 0, before the conversation exists.**
+
+### 5.6 Liz's view (no admin UI in V1)
+
+On every completed conversation, an email to Liz: user's name, business name, one-liner, plan link, and a 3-line summary flagging where they seemed most and least confident. This is the funnel review, the session-prep pipeline, and the trigger for optional one-line personal follow-ups — V1 volumes make a dashboard unnecessary.
 
 ## 6. AI pipeline requirements
 
-- Each stage is a **separate prompt template** (versioned config, not hard-coded), receiving: the full Business Brain JSON + the stage instruction + Liz's methodology notes (editable system context).
-- The **challenge step is mandatory** in stages 1–3, optional in 4. Challenges must reference the user's actual answers, never be generic.
-- Tone: warm, direct, expert. Explicitly instructed to disagree when the input is weak, and to say *why*.
-- Output contract: every generation returns structured JSON matching the Brain schema fields for that stage (validate; retry once on parse failure; graceful error UI on second failure).
-- Model calls go through a single provider-agnostic function (`generate(stage, brain, userInput)`) so the rebuild can swap providers trivially. Default: latest Claude model via API.
-- Latency: streaming output or a staged progress indicator; no silent spinner > 3s.
+- **One conversation engine, phase-aware.** System context = Liz's methodology + tone rules (§4) + current phase goal + Business Brain so far. The engine both converses and **extracts**: after each user message, it updates Brain fields (structured extraction, not free-text accumulation).
+- **Phase-completion check** decides advance/stay; a phase may not be skipped with its required fields empty (the spine guarantees a complete plan).
+- **Challenge budget** enforced in prompt logic: 2–3 per conversation, only where the user's actual input is weak, always with a proposed alternative.
+- **Generation moments:** website copy, Lovable prompt, checklist and plan assembly are discrete generation calls at phase 6–7, validated against the schema (retry once on parse failure; graceful apology + Liz-notification on second failure — never a dead end for the user).
+- Provider-agnostic call layer as before (`generate(...)` / `converse(...)`); all calls server-side; default latest Claude model.
+- Latency: streamed responses; typing indicator; no silent wait > 3s.
+- Abandoned conversations with a captured email (rare, since email is late): none in V1 — abandonment before phase 7 simply expires with the anonymous session after 7 days.
 
-## 7. Lovable prompt generator (the final artefact)
+## 7. Lovable prompt generator
 
-Generates ONE self-contained prompt containing:
-1. Business context paragraph (from Brain: idea, audience, positioning).
-2. Full page structure with the **exact copy from Stage 4** embedded verbatim (hero, problem, solution, offer, about, FAQ, footer).
-3. Design direction derived from tone of voice (palette mood, typography feel, imagery guidance) — descriptive, not prescriptive hex values.
-4. Functional requirements: single landing page, email capture form, CTA to the offer, mobile responsive, fast.
-5. Explicit instruction to Lovable: build exactly this copy, don't rewrite it.
+Unchanged from v1.0: one self-contained prompt with business context, full page structure embedding the phase-6 copy verbatim, design direction derived from tone, functional requirements (single page, email capture, CTA, responsive), and the explicit instruction not to rewrite the copy. Acceptance: pasted unmodified into Lovable, yields a coherent site with the user's copy intact.
 
-Acceptance: pasting the prompt into Lovable unmodified yields a coherent single-page site with the user's copy intact.
+## 8. Business Brain schema (canonical — unchanged, populated silently)
 
-## 8. Business Brain schema (canonical — survives the rebuild)
+The schema from PRD v1.0 §8 stands verbatim, with `meta.source: "creator"` and one addition:
 
 ```jsonc
-{
-  "brain_id": "uuid",
-  "owner": { "user_id": "uuid", "email": "string", "first_name": "string" },
-  "meta": { "created_at": "iso", "updated_at": "iso", "stage_reached": "intake|idea|positioning|offer|copy|complete", "source": "creator" },
-  "intake": { "raw_answers": [{ "question_id": "string", "answer": "string" }] },
-  "identity": { "working_name": "string", "one_liner": "string", "category": "string" },
-  "customer": { "target_description": "string", "problem": "string", "alternatives": "string" },
-  "founder": { "unfair_advantage": "string", "time_per_week": "string", "ambition_12mo": "string" },
-  "positioning": { "statement": "string", "differentiator": "string", "message_pillars": ["string"], "tone_of_voice": "string" },
-  "offer": { "name": "string", "deliverables": ["string"], "price": "string", "price_rationale": "string", "risk_reversal": "string", "primary_cta": "string" },
-  "website": { "hero": {}, "problem": {}, "solution": {}, "offer_section": {}, "about": {}, "faq": [], "footer_cta": {}, "lovable_prompt": "string" },
-  "assessment": { "risks": ["string"], "viability_note": "string" },
-  "history": [{ "at": "iso", "stage": "string", "event": "proposed|challenged|user_edit|locked", "summary": "string" }],
-  "future": { "audit": null, "metrics": null, "actions": null }  // reserved for Door B / Mission Control / Admin
+"confidence": {
+  "self_reported_start": "string|null",   // how they described their confidence early on, if surfaced
+  "published_site": false,
+  "published_at": null,
+  "shared_plan": false
 }
 ```
 
-`history` and `future` exist from day one even though the MVP barely uses them — they are what make the Brain an accumulating asset rather than a form submission.
+The conversation engine writes to this schema as its extraction target. `history` records phase transitions and challenges issued. `future` remains reserved for audit/Mission Control/Admin. **This schema, not the Lovable code, is what survives the rebuild.**
 
 ## 9. Architecture (platform-agnostic)
 
-- **Client:** SPA/SSR web app — landing, wizard, workspace, dashboard, admin. No framework mandated; Lovable's default is fine for the prototype.
-- **API layer:** thin backend exposing: auth, `brains` CRUD, `generate(stage)` orchestration, admin queries. All AI calls server-side (never expose keys client-side).
-- **Orchestration:** prompt templates + methodology context stored as versioned config/data, not code.
-- **Storage:** Postgres (Lovable prototype: Supabase). Tables: `users`, `brains` (JSONB column holding the schema in §8), `events` (analytics). The JSONB-first design is deliberate: the rebuild migrates by copying rows.
-- **Auth:** email magic link or email+password. Nothing social for MVP.
-- **Payments/booking:** Stripe Payment Link + Calendly. Zero custom code.
-- **Analytics:** event log (wizard_start, stage_locked, signup, pack_complete, prompt_copied, session_click, session_paid-manual) to the `events` table + any page analytics.
+- **Client:** the Build a Business page, conversation UI, plan page, session page. Mobile-first — this audience is on phones in the evening.
+- **API:** anonymous conversation sessions (server-held state), `converse` endpoint, plan assembly + tokenized delivery, email send (plan to user; summary to Liz), event logging. **No auth system.** Plan tokens are long-random, unguessable, non-expiring.
+- **Storage:** Postgres/Supabase — `conversations` (session state), `brains` (JSONB, schema §8), `events`. Anonymous sessions expire after 7 days if no email was captured.
+- **Email:** transactional provider (Resend or similar); plan email + Liz notification + publish-congratulations.
+- **Payments/booking:** Stripe Payment Link + Calendly. No custom code.
+- **Events:** `conversation_start`, `phase_advanced`, `challenge_issued`, `email_captured`, `plan_delivered`, `plan_viewed`, `prompt_copied`, `published_confirmed`, `plan_forward_visit`, `session_click`, `session_booked` (manual for V1).
 
-## 10. Out of scope (MVP)
+## 10. Out of scope (V1)
 
-- Website URL audit (next release), GA/GSC/tool integrations, Mission Control brief, subscriptions/recurring billing, any drafting/acting "Admin" behaviour, teams, custom booking, mobile apps, standalone domain/brand.
+Accounts/login, dashboards (user or admin), URL audits, GA/GSC/tool integrations, Mission Control, subscriptions, AI Business Admin or any drafting/acting behaviour, multiple businesses per user, teams, custom booking/payments, standalone brand/domain.
 
 ## 11. Risks & mitigations
 
 | Risk | Mitigation |
 |---|---|
-| Output feels like generic ChatGPT | Mandatory challenge loop; Liz's methodology in system context; honest viability notes |
-| Users grab the website prompt and vanish | Pack framing; signup gate before full outputs; 7-day checklist + email follow-up |
-| Lovable prompt renders badly | Acceptance-test the generator against Lovable weekly; keep instructions explicit |
-| Wizard fatigue (10 questions + 4 stages) | One question per screen; visible progress; "not sure" allowed everywhere; ~15 min total |
-| Prototype data model drifts from schema | §8 is canonical; Lovable is instructed to store exactly this JSON |
+| Conversation wanders; user leaves without a complete plan | Invisible spine with per-phase required fields; no phase skips |
+| Guide feels like a chatbot | Mirror moment, callbacks, and challenge budget as hard acceptance criteria; Liz reviews transcripts weekly and tunes the methodology context |
+| Free plan is so complete the session feels redundant | Session framed as acceleration with Liz personally; session card appears at the moment of momentum (end of plan) |
+| Users grab the Lovable prompt and vanish | Plan framing (prompt is section 7 of 9); email captured before delivery; checklist + congratulations loop |
+| Tone drifts intimidating or sycophantic | Tone rules in versioned methodology context; challenge budget; explicit "never two questions at once" rule |
+| Plan link privacy | Unguessable tokens; no indexing; forwarding is a feature, not a leak — nothing sensitive beyond what the user chose to share |
 
-## 12. Build order for Lovable
+## 12. Build order
 
-1. Landing section + session page (Stripe/Calendly links live) — *revenue possible on day 1*.
-2. Wizard intake (Stage 0) + local persistence.
-3. Generation pipeline Stage 1 with challenge loop + signup gate.
-4. Stages 2–4 + Business Pack workspace.
-5. Lovable prompt generator + Next Steps tab.
-6. Dashboard + admin + event logging.
+1. **Day 0:** Build a Business page + £150 session page with live Stripe/Calendly — revenue and validation before any software.
+2. Conversation UI + phase engine (phases 1–3) with extraction into the Brain.
+3. Phases 4–7 + email capture + plan assembly.
+4. Business Plan page + Lovable prompt generator + delivery emails (user + Liz).
+5. Publish confirmation loop + event logging.
+6. Transcript review pass with Liz; tune methodology context; launch to warm traffic.
